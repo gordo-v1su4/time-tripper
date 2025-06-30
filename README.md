@@ -1,47 +1,62 @@
-# Svelte + TS + Vite
+# Web TimeShaper
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+This project is a web-based audio-visual tool called **Web TimeShaper**. It allows for advanced audio manipulation and synchronization of video based on audio events. The application is built with SvelteKit and utilizes a powerful stack including Konva.js for canvas interactions, the Web Audio API for real-time audio processing, WebCodecs for efficient media handling, and FFmpeg.wasm for in-browser video and audio transcoding.
+
+The application is divided into two main workspaces:
+
+1.  **Time Shaper**: This workspace is focused on audio manipulation. Users can load audio files, and then use an interactive LFO (Low-Frequency Oscillator) canvas to design complex modulations that affect the audio playback in real-time. This is powered by a custom `AudioWorklet` processor for high-performance audio processing.
+
+2.  **Swappy Video Editor**: This workspace is for synchronizing video playback to audio events. It can automatically detect transients in an audio track and allows the user to map video actions (like clip selection, speed changes, and reverse playback) to these audio events. This allows for creating dynamic, audio-driven video sequences.
+
+## Project Structure
+
+```
+/home/gordo/time-tripper/
+├───.env
+├───.gitignore
+├───index.html
+├───package.json
+├───pnpm-lock.yaml
+├───postcss.config.js
+├───README.md
+├───svelte.config.js
+├───tailwind.config.js
+├───vite.config.ts
+├───docs/
+│   ├───dev-checklist.md
+│   └───uiux-instruct.md
+├───public/
+│   └───vite.svg
+├───src/
+│   ├───app.css
+│   ├───App.svelte
+│   ├───main.js
+│   ├───components/
+│   │   ├───AudioPlayer.svelte
+│   │   ├───LFO_Canvas.svelte
+│   │   ├───VideoPlayer.svelte
+│   │   └───VideoUploader.svelte
+│   ├───lib/
+│   │   ├───Counter.svelte
+│   │   ├───components/
+│   │   │   ├───InteractiveWaveform.svelte
+│   │   │   └───VideoActionEditor.svelte
+│   │   ├───services/
+│   │   │   ├───AudioEngine.js
+│   │   │   ├───FFmpegService.js
+│   │   │   ├───PlaybackEngine.js
+│   │   │   └───VideoDecoderService.js
+│   │   └───stores/
+│   │       └───appStore.svelte.js
+│   └───pages/
+│       ├───SwappyEditor.svelte
+│       ├───TimeShaper.svelte
+│       └───Welcome.svelte
+└───static/
+    └───audio/
+        └───time-shaper-processor.js
+```
 
 ## Recommended IDE Setup
 
 [VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
-
-## Need an official Svelte framework?
-
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
-
-## Technical considerations
-
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```

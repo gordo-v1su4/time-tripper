@@ -7,7 +7,19 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# SvelteKit build files
+.svelte-kit
+build
+dist
+
+# Node modules
 node_modules
+
+# Environment variables
+.env
+
+# Temporary files
+swappy-temp/
 dist
 dist-ssr
 *.local
