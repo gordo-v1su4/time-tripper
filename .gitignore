@@ -20,6 +20,9 @@ node_modules
 
 # Temporary files
 swappy-temp/
+
+# Gemini CLI folder
+gemini-cli/
 dist
 dist-ssr
 *.local
