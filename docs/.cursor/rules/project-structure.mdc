@@ -1,0 +1,139 @@
+---
+alwaysApply: true
+---
+
+# Time-Tripper Project Structure
+
+## Overview
+Time-Tripper is a Svelte-based web application for audio/video manipulation and time-shaping. The project uses Vite as the build tool, Tailwind CSS for styling, and includes custom audio processing capabilities.
+
+## Root Directory Structure
+
+```
+time-tripper/
+├── docs/                    # Documentation and cursor rules
+├── public/                  # Static assets served by Vite
+├── src/                     # Main source code
+├── static/                  # Static files (audio processors)
+├── index.html              # Entry point HTML
+├── package.json            # Dependencies and scripts
+├── pnpm-lock.yaml          # Lock file for pnpm
+├── svelte.config.js        # Svelte configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+├── postcss.config.js       # PostCSS configuration
+├── vite.config.ts          # Vite build configuration
+├── README.md               # Project documentation
+└── .gitignore              # Git ignore patterns
+```
+
+## Source Code Structure (`src/`)
+
+### Main Application Files
+- `main.js` - Application entry point, initializes Svelte app
+- `App.svelte` - Root component, main application layout
+- `app.css` - Global CSS styles
+
+### Components (`src/components/`)
+Core UI components for the application:
+- `AudioTimeline.svelte` - Main audio timeline interface (12KB, 364 lines)
+- `LFO_Canvas.svelte` - Low-frequency oscillator canvas component (2.5KB, 100 lines)
+- `VideoPlayer.svelte` - Video playback component (401B, 15 lines)
+- `VideoUploader.svelte` - Video upload interface (1.2KB, 39 lines)
+
+### Library (`src/lib/`)
+Reusable components, services, and stores:
+
+#### Components (`src/lib/components/`)
+- `InteractiveWaveform.svelte` - Interactive waveform visualization (2.2KB, 82 lines)
+- `VideoActionEditor.svelte` - Video action editing interface (600B, 30 lines)
+- `Counter.svelte` - Example counter component (167B, 11 lines)
+
+#### Services (`src/lib/services/`)
+Core business logic and external integrations:
+- `AudioEngine.js` - Audio processing and manipulation engine (1.2KB, 48 lines)
+- `FFmpegService.js` - FFmpeg integration for video processing (471B, 28 lines)
+- `PlaybackEngine.js` - Media playback control and synchronization (1.4KB, 51 lines)
+
+#### Stores (`src/lib/stores/`)
+Svelte stores for state management:
+- `appStore.js` - Main application state store (137B, 5 lines)
+
+## Static Assets (`static/`)
+
+### Audio Processors (`static/audio/`)
+- `time-shaper-processor.js` - Custom Web Audio API processor for time manipulation (3.1KB, 107 lines)
+
+## Public Assets (`public/`)
+- `vite.svg` - Vite logo (1.5KB)
+
+## Documentation (`docs/`)
+
+### Cursor Rules (`docs/.cursor/rules/`)
+- `cursor-rules.mdc` - General cursor rules for the project (3.1KB, 134 lines)
+- `self-improve.mdc` - Self-improvement guidelines (2.3KB, 86 lines)
+- `project-structure.mdc` - This file (project structure documentation)
+
+### Development Documentation
+- `dev-checklist.md` - Development checklist and guidelines (14KB, 209 lines)
+- `uiux-instruct.md` - UI/UX design instructions (14KB, 206 lines)
+
+## Key Technologies and Dependencies
+
+### Frontend Framework
+- **Svelte** - Component-based reactive framework
+- **Vite** - Fast build tool and dev server
+
+### Styling
+- **Tailwind CSS** - Utility-first CSS framework
+- **PostCSS** - CSS processing
+
+### Audio/Video Processing
+- **Web Audio API** - Browser-based audio processing
+- **FFmpeg** - Video processing and manipulation
+- **Custom Audio Processors** - Time-shaping and effects
+
+### Package Manager
+- **pnpm** - Fast, disk space efficient package manager
+
+## Important File Patterns
+
+### Svelte Components
+- All component files use `.svelte` extension
+- Components are organized by functionality and scope
+- Main app components in `src/components/`
+- Reusable library components in `src/lib/components/`
+
+### JavaScript Services
+- Service files use `.js` extension
+- Located in `src/lib/services/`
+- Handle business logic and external integrations
+
+### Configuration Files
+- Build configuration: `vite.config.ts`, `svelte.config.js`
+- Styling configuration: `tailwind.config.js`, `postcss.config.js`
+- Package management: `package.json`, `pnpm-lock.yaml`
+
+### Documentation
+- All documentation in `docs/` directory
+- Cursor rules in `docs/.cursor/rules/`
+- Development guidelines in markdown format
+
+## Development Workflow
+
+1. **Entry Point**: `src/main.js` → `src/App.svelte`
+2. **Component Development**: Add new components to appropriate directories
+3. **Services**: Implement business logic in `src/lib/services/`
+4. **State Management**: Use Svelte stores in `src/lib/stores/`
+5. **Styling**: Use Tailwind CSS classes, global styles in `src/app.css`
+6. **Audio Processing**: Custom processors in `static/audio/`
+
+## File Size Notes
+- Largest component: `AudioTimeline.svelte` (12KB, 364 lines) - Main timeline interface
+- Largest documentation: `dev-checklist.md` and `uiux-instruct.md` (14KB each)
+- Audio processor: `time-shaper-processor.js` (3.1KB, 107 lines)
+
+This structure follows Svelte best practices with clear separation of concerns, modular components, and organized service architecture for audio/video processing capabilities.
+description:
+globs:
+alwaysApply: false
+---

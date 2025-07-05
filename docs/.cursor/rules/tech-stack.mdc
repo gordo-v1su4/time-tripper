@@ -1,0 +1,224 @@
+# Time-Tripper Tech Stack Analysis
+
+## Overview
+Time-Tripper is built on a modern JavaScript stack optimized for audio/video processing and real-time manipulation. The application uses Svelte 5 with Vite 6, leveraging cutting-edge Web APIs and specialized libraries for media handling.
+
+## Core Framework Stack
+
+### Svelte 5.28.1 ⭐ **Latest Major Version**
+- **Status**: Latest stable release (as of 2024)
+- **Key Features**: 
+  - Runes-based reactivity system
+  - Improved performance over Svelte 4
+  - Better TypeScript support
+  - Fragment syntax for cleaner templates
+- **Best Practices**:
+  - Use runes (`$state`, `$derived`, `$effect`) for reactive state
+  - Leverage new fragment syntax for conditional rendering
+  - Take advantage of improved TypeScript integration
+  - Consider migrating from Svelte 4 patterns if upgrading
+
+### Vite 6.3.5 ⭐ **Latest Major Version**
+- **Status**: Latest stable release
+- **Key Features**:
+  - Extremely fast HMR (Hot Module Replacement)
+  - ES modules by default
+  - Optimized build process
+  - Plugin ecosystem
+- **Best Practices**:
+  - Use ES modules syntax consistently
+  - Leverage Vite's built-in optimizations
+  - Configure proper build targets for production
+  - Use Vite's asset handling for static files
+
+### @sveltejs/vite-plugin-svelte 5.0.3
+- **Status**: Compatible with Svelte 5
+- **Purpose**: Vite integration for Svelte
+- **Best Practices**:
+  - Keep in sync with Svelte version
+  - Configure for optimal development experience
+
+## Styling Stack
+
+### Tailwind CSS 3.4.17 ⭐ **Latest Stable**
+- **Status**: Latest stable release
+- **Key Features**:
+  - Utility-first CSS framework
+  - JIT (Just-In-Time) compilation
+  - Extensive design system
+  - Responsive design utilities
+- **Best Practices**:
+  - Use Tailwind's design tokens consistently
+  - Leverage responsive utilities for mobile-first design
+  - Customize theme in `tailwind.config.js` for brand consistency
+  - Use `@apply` sparingly, prefer utility classes
+
+### PostCSS 8.0.0
+- **Status**: Stable version
+- **Purpose**: CSS processing pipeline
+- **Best Practices**:
+  - Configure for optimal Tailwind integration
+  - Use for custom CSS transformations if needed
+
+### Autoprefixer 10.0.0
+- **Status**: Stable version
+- **Purpose**: Automatic vendor prefixing
+- **Best Practices**:
+  - Configure browser targets appropriately
+  - Let it handle cross-browser compatibility automatically
+
+## Audio/Video Processing Stack
+
+### @ffmpeg/ffmpeg 0.12.15 ⭐ **Latest Version**
+- **Status**: Latest stable release
+- **Key Features**:
+  - WebAssembly-based FFmpeg
+  - Client-side video processing
+  - No server dependencies for video manipulation
+  - Support for multiple video formats
+- **Best Practices**:
+  - Use Web Workers for heavy processing to avoid blocking UI
+  - Implement proper error handling for processing failures
+  - Consider memory usage for large video files
+  - Cache processed results when possible
+  - Handle CORS issues with proper configuration
+
+### @ffmpeg/util 0.12.2
+- **Status**: Compatible with FFmpeg version
+- **Purpose**: Utility functions for FFmpeg integration
+- **Best Practices**:
+  - Keep in sync with main FFmpeg package
+  - Use for file handling and memory management
+
+### wavesurfer.js 7.9.9 ⭐ **Latest Version**
+- **Status**: Latest stable release
+- **Key Features**:
+  - Advanced audio visualization
+  - Multiple waveform types
+  - Real-time audio analysis
+  - Plugin ecosystem
+- **Best Practices**:
+  - Use appropriate waveform types for different use cases
+  - Implement proper cleanup on component destruction
+  - Handle audio loading states gracefully
+  - Consider performance for large audio files
+  - Use plugins for extended functionality
+
+## Canvas/Graphics Stack
+
+### Konva 9.3.20 ⭐ **Latest Version**
+- **Status**: Latest stable release
+- **Key Features**:
+  - 2D canvas library
+  - High-performance graphics
+  - Event handling
+  - Animation support
+- **Best Practices**:
+  - Use for complex canvas interactions
+  - Implement proper cleanup to prevent memory leaks
+  - Optimize rendering for performance
+  - Handle touch and mouse events appropriately
+  - Use layers for complex scenes
+
+## Version Compatibility Matrix
+
+| Component | Version | Status | Notes |
+|-----------|---------|--------|-------|
+| Svelte | 5.28.1 | ✅ Latest | Major version with runes |
+| Vite | 6.3.5 | ✅ Latest | ES modules by default |
+| Tailwind CSS | 3.4.17 | ✅ Latest | JIT compilation |
+| FFmpeg | 0.12.15 | ✅ Latest | WebAssembly-based |
+| WaveSurfer | 7.9.9 | ✅ Latest | Audio visualization |
+| Konva | 9.3.20 | ✅ Latest | Canvas graphics |
+
+## Development Environment
+
+### Package Manager: pnpm
+- **Advantages**: 
+  - Faster installation
+  - Disk space efficient
+  - Strict dependency resolution
+  - Better monorepo support
+- **Best Practices**:
+  - Use `pnpm-lock.yaml` for reproducible builds
+  - Configure `.npmrc` for optimal settings
+  - Use workspace features if expanding to monorepo
+
+### Module System: ES Modules
+- **Configuration**: `"type": "module"` in package.json
+- **Best Practices**:
+  - Use ES module syntax consistently
+  - Leverage tree-shaking for smaller bundles
+  - Use dynamic imports for code splitting
+
+## Security Considerations
+
+### FFmpeg WebAssembly
+- **Risk**: Client-side processing of user files
+- **Mitigation**: 
+  - Validate file types and sizes
+  - Implement proper error boundaries
+  - Consider server-side processing for sensitive operations
+
+### Audio/Video Processing
+- **Risk**: Memory usage with large files
+- **Mitigation**:
+  - Implement file size limits
+  - Use streaming for large files
+  - Monitor memory usage in development
+
+## Performance Optimization
+
+### Build Optimization
+- **Vite**: Leverage built-in optimizations
+- **Tree Shaking**: ES modules enable effective tree shaking
+- **Code Splitting**: Use dynamic imports for large dependencies
+
+### Runtime Optimization
+- **Svelte**: Runes provide better reactivity performance
+- **Canvas**: Konva optimizations for smooth animations
+- **Audio**: WaveSurfer optimizations for real-time processing
+
+## Recommended Updates and Monitoring
+
+### High Priority
+- Monitor Svelte 5.x updates for new features
+- Keep FFmpeg updated for security patches
+- Update WaveSurfer for new audio features
+
+### Medium Priority
+- Monitor Vite updates for build optimizations
+- Update Tailwind for new utilities
+- Consider Konva updates for performance improvements
+
+### Low Priority
+- PostCSS and Autoprefixer updates (usually automatic)
+
+## Development Scripts
+
+```json
+{
+  "dev": "vite",           // Development server with HMR
+  "build": "vite build",   // Production build
+  "preview": "vite preview" // Preview production build
+}
+```
+
+## Environment Requirements
+
+### Browser Support
+- Modern browsers with ES modules support
+- WebAssembly support for FFmpeg
+- Web Audio API support for audio processing
+- Canvas API support for graphics
+
+### Development Tools
+- Node.js 18+ (recommended for Vite 6)
+- pnpm for package management
+- Modern IDE with Svelte support
+
+This stack represents a cutting-edge setup for audio/video web applications, with all dependencies at their latest stable versions and excellent compatibility between components.
+description:
+globs:
+alwaysApply: false
+---
